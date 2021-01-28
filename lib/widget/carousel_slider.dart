@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_netflix/screen/DetailScreen.dart';
 
 import '../model/model_movie.dart';
 
@@ -63,7 +64,7 @@ class _CarouselImageState extends State<CarouselImage> {
                     children: [
                       likes[_currentPage]
                           ? IconButton(
-                          icon: Icon(Icons.check), onPressed: () {})
+                              icon: Icon(Icons.check), onPressed: () {})
                           : IconButton(icon: Icon(Icons.add), onPressed: () {}),
                       Text(
                         '내가 찜한 콘텐츠',
@@ -97,7 +98,14 @@ class _CarouselImageState extends State<CarouselImage> {
                     children: <Widget>[
                       IconButton(
                         icon: Icon(Icons.info),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              fullscreenDialog: true,
+                              builder: (context) {
+                                return DetailScreen(
+                                    movie: movies[_currentPage]);
+                              }));
+                        },
                       ),
                       Text(
                         '정보',
@@ -124,19 +132,16 @@ class _CarouselImageState extends State<CarouselImage> {
 List<Widget> makeIndicator(List<bool> likes, int _currentPage) {
   List<Widget> result = [];
   for (var i = 0; i < likes.length; i++) {
-    result.add(
-        Container(
-          width: 8,
-          height: 8,
-          margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
-          decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: _currentPage == i
-                  ? Color.fromRGBO(255, 255, 255, 0.9)
-                  : Color.fromRGBO(255, 255, 255, 0.4)
-          ),
-        )
-    );
+    result.add(Container(
+      width: 8,
+      height: 8,
+      margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+      decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: _currentPage == i
+              ? Color.fromRGBO(255, 255, 255, 0.9)
+              : Color.fromRGBO(255, 255, 255, 0.4)),
+    ));
   }
 
   return result;

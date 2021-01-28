@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_netflix/screen/DetailScreen.dart';
 
 import '../model/model_movie.dart';
 
@@ -33,7 +34,14 @@ List<Widget> makeCircleImages(BuildContext context, List<Movie> movies) {
 
   for (var i = 0; i < movies.length; i++) {
     result.add(InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            fullscreenDialog: true,
+            builder: (context) {
+              return DetailScreen(
+                  movie: movies[i]);
+            }));
+      },
       child: Container(
         padding: EdgeInsets.only(right: 10),
         child: Align(
