@@ -64,8 +64,27 @@ class _CarouselImageState extends State<CarouselImage> {
                     children: [
                       likes[_currentPage]
                           ? IconButton(
-                              icon: Icon(Icons.check), onPressed: () {})
-                          : IconButton(icon: Icon(Icons.add), onPressed: () {}),
+                              icon: Icon(Icons.check),
+                              onPressed: () {
+                                setState(() {
+                                  likes[_currentPage] = !likes[_currentPage];
+
+                                  Map<String, dynamic> map = Map();
+                                  map['like'] = likes[_currentPage];
+                                  movies[_currentPage].reference.update(map);
+                                });
+                              })
+                          : IconButton(
+                              icon: Icon(Icons.add),
+                              onPressed: () {
+                                setState(() {
+                                  likes[_currentPage] = !likes[_currentPage];
+
+                                  Map<String, dynamic> map = Map();
+                                  map['like'] = likes[_currentPage];
+                                  movies[_currentPage].reference.update(map);
+                                });
+                              }),
                       Text(
                         '내가 찜한 콘텐츠',
                         style: TextStyle(fontSize: 11),
